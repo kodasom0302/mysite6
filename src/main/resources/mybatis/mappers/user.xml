@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	
+	<!-- 수정하기 - 회원정보수정 -->
+	<update id="update" parameterType="com.javaex.vo.UserVo">
+		<![CDATA[
+			update  users
+			set password=#{password},
+				name=#{name},
+				gender=#{gender}
+			where no=#{no}
+		]]>
+	</update>
+	
+	<!-- 등록하기 - 회원가입 -->
+	<insert id="insert" parameterType="com.javaex.vo.UserVo">
+		<![CDATA[
+			insert into users 
+			values(null, #{id}, #{password}, #{name}, #{gender})
+		]]>
+	</insert>
+	
+	<!-- 1명 데이터 가져오기 - 로그인 -->
+	<select id="selectByIdPw" parameterType="com.javaex.vo.UserVo"
+		resultType="com.javaex.vo.UserVo">
+		<![CDATA[
+			select  no,
+					id,
+					name
+			from users
+			where id=#{id}
+			and password=#{password}
+		]]>
+	</select>
+	
+</mapper>
